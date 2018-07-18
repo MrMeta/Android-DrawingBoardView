@@ -33,4 +33,5 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 
     implementation 'com.github.mukeshsolanki:DrawingView-Android:1.0.7'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.2'
 }
