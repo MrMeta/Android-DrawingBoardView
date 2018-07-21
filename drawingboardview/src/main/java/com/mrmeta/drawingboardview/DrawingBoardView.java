@@ -5,7 +5,7 @@ import android.util.AttributeSet;
 
 import com.byox.drawview.views.DrawView;
 
-class DrawingBoardView extends DrawView {
+public class DrawingBoardView extends DrawView {
 
     public DrawingBoardView(Context context) {
         super(context);
@@ -17,5 +17,9 @@ class DrawingBoardView extends DrawView {
 
     public DrawingBoardView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+    }
+
+    public DrawView setDrawColor(int drawColor) {
+        return super.setDrawColor(drawColor);
     }
 }
