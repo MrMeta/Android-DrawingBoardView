@@ -19,7 +19,29 @@ public class DrawingBoardView extends DrawView {
         super(context, attrs, defStyleAttr);
     }
 
-    public DrawView setDrawColor(int drawColor) {
-        return super.setDrawColor(drawColor);
+    // pen color, paint color, shape border color
+    public DrawingBoardView setDrawColor(int drawColor) {
+        super.setDrawColor(drawColor);
+        return this;
     }
+
+    // pen size, erase size, shape border size
+    public DrawingBoardView setDrawWidth(int drawWidth) {
+        super.setDrawWidth(drawWidth);
+        return this;
+    }
+
+    // pen opacity
+    public DrawingBoardView setDrawAlpha(int drawAlpha) {
+        super.setDrawAlpha(drawAlpha);
+        return this;
+    }
+
+    // TODO: implements clear
+
+    // TODO: implements shape type
+
+    // TODO: shape fill color
+
+    // TODO: select eraser, paint
 }
