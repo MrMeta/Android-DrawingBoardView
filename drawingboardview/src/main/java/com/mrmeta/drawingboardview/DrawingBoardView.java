@@ -1,6 +1,7 @@
 package com.mrmeta.drawingboardview;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.util.AttributeSet;
 
 import com.byox.drawview.enums.DrawingMode;
@@ -33,6 +34,11 @@ public class DrawingBoardView extends DrawView {
 
     public void init() {
         setLineCap(SerializablePaint.Cap.ROUND);
+
+        SerializablePaint paint = new SerializablePaint();
+        paint.setColor(Color.WHITE);
+        setBackgroundPaint(paint);
+        setBackgroundColor(Color.WHITE);
     }
 
     // pen color, fill color, shape border color
@@ -87,7 +93,11 @@ public class DrawingBoardView extends DrawView {
         return this;
     }
 
-    // TODO: implements clear
+    // select clear
+    public DrawingBoardView selectClear() {
+        super.clearHistory();
+        return this;
+    }
 
     // TODO: shape fill color
 }

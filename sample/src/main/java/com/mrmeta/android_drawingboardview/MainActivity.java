@@ -117,5 +117,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        Button selectClear = (Button)findViewById(R.id.select_clear);
+        selectClear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mDrawingBoardView.selectClear();
+            }
+        });
+
     }
 }
