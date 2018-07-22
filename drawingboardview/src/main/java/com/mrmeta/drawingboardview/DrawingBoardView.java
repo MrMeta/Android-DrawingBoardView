@@ -35,7 +35,7 @@ public class DrawingBoardView extends DrawView {
         setLineCap(SerializablePaint.Cap.ROUND);
     }
 
-    // pen color, paint color, shape border color
+    // pen color, fill color, shape border color
     public DrawingBoardView setDrawColor(int drawColor) {
         super.setDrawColor(drawColor);
         return this;
@@ -80,9 +80,14 @@ public class DrawingBoardView extends DrawView {
         return this;
     }
 
+    // select fill
+    public DrawingBoardView selectFill() {
+        setDrawingMode(DrawingMode.DRAW);
+        setDrawingTool(DrawingTool.FILL);
+        return this;
+    }
+
     // TODO: implements clear
 
     // TODO: shape fill color
-
-    // TODO: select paint
 }

@@ -109,5 +109,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        Button selectFill = (Button)findViewById(R.id.select_fill);
+        selectFill.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mDrawingBoardView.selectFill();
+            }
+        });
+
     }
 }
