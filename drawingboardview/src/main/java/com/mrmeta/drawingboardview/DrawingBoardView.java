@@ -4,87 +4,109 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.LinearLayout;
 
 import com.byox.drawview.enums.DrawingMode;
 import com.byox.drawview.enums.DrawingTool;
 import com.byox.drawview.utils.SerializablePaint;
 import com.byox.drawview.views.DrawView;
 
-public class DrawingBoardView extends DrawView {
+public class DrawingBoardView extends LinearLayout {
 
-    // TODO: 분리..?
-    public enum Shape {
-        RECTANGLE,
-        CIRCLE,
-    }
+    DrawView mDrawView;
 
     public DrawingBoardView(Context context) {
         super(context);
-        init();
+        initView();
     }
 
     public DrawingBoardView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        init();
+        initView();
     }
 
     public DrawingBoardView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        init();
+        initView();
     }
 
-    public void init() {
-        setLineCap(SerializablePaint.Cap.ROUND);
+    private void initView() {
+        LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View view = inflater.inflate(R.layout.view_drawing_board, this, false);
+        addView(view);
 
-        SerializablePaint paint = new SerializablePaint();
-        paint.setColor(Color.WHITE);
-        setBackgroundPaint(paint);
-        setBackgroundColor(Color.WHITE);
+        mDrawView = view.findViewById(R.id.draw_view);
+        initDrawView();
+    }
+
+    public void initDrawView() {
+        if (mDrawView != null) {
+            mDrawView.setLineCap(SerializablePaint.Cap.ROUND);
+
+            SerializablePaint paint = new SerializablePaint();
+            paint.setColor(Color.WHITE);
+            mDrawView.setBackgroundPaint(paint);
+            mDrawView.setBackgroundColor(Color.WHITE);
+        }
     }
 
     // pen color, fill color, shape border color
     public DrawingBoardView setDrawColor(int drawColor) {
-        super.setDrawColor(drawColor);
+        mDrawView.setDrawColor(drawColor);
         return this;
+    }
+
+    public int getDrawColor() {
+        return mDrawView.getDrawColor();
     }
 
     // pen size, erase size, shape border size
     public DrawingBoardView setDrawWidth(int drawWidth) {
-        super.setDrawWidth(drawWidth);
+        mDrawView.setDrawWidth(drawWidth);
         return this;
+    }
+
+    public int getDrawWidth() {
+        return mDrawView.getDrawWidth();
     }
 
     // pen opacity
     public DrawingBoardView setDrawAlpha(int drawAlpha) {
-        super.setDrawAlpha(drawAlpha);
+        mDrawView.setDrawAlpha(drawAlpha);
         return this;
+    }
+
+    public int getDrawAlpha() {
+        return mDrawView.getDrawAlpha();
     }
 
     // select eraser
     public DrawingBoardView selectEraser() {
-        setDrawingMode(DrawingMode.ERASER);
-        setPaintStyle(Paint.Style.STROKE);
+        mDrawView.setDrawingMode(DrawingMode.ERASER);
+        mDrawView.setPaintStyle(Paint.Style.STROKE);
         return this;
     }
 
     // select pen
     public DrawingBoardView selectPen() {
-        setDrawingMode(DrawingMode.DRAW);
-        setDrawingTool(DrawingTool.PEN);
-        setPaintStyle(Paint.Style.STROKE);
+        mDrawView.setDrawingMode(DrawingMode.DRAW);
+        mDrawView.setDrawingTool(DrawingTool.PEN);
+        mDrawView.setPaintStyle(Paint.Style.STROKE);
         return this;
     }
 
     // select shape
     public DrawingBoardView selectShape(Shape type) {
-        setDrawingMode(DrawingMode.DRAW);
-        setPaintStyle(Paint.Style.FILL_AND_STROKE);
+        mDrawView.setDrawingMode(DrawingMode.DRAW);
+        mDrawView.setPaintStyle(Paint.Style.FILL_AND_STROKE);
         switch (type) {
             case RECTANGLE:
-                setDrawingTool(DrawingTool.RECTANGLE);
+                mDrawView.setDrawingTool(DrawingTool.RECTANGLE);
                 break;
             case CIRCLE:
-                setDrawingTool(DrawingTool.CIRCLE);
+                mDrawView.setDrawingTool(DrawingTool.CIRCLE);
                 break;
         }
         return this;
@@ -92,14 +114,36 @@ public class DrawingBoardView extends DrawView {
 
     // select fill
     public DrawingBoardView selectFill() {
-        setDrawingMode(DrawingMode.DRAW);
-        setDrawingTool(DrawingTool.FILL);
+        mDrawView.setDrawingMode(DrawingMode.DRAW);
+        mDrawView.setDrawingTool(DrawingTool.FILL);
         return this;
     }
 
     // select clear
     public DrawingBoardView selectClear() {
-        super.clearHistory();
+        mDrawView.clearHistory();
         return this;
+    }
+
+    public boolean canUndo() {
+        return mDrawView.canUndo();
+    }
+
+    public boolean undo() {
+        return mDrawView.undo();
+    }
+
+    public boolean canRedo() {
+        return mDrawView.canRedo();
+    }
+
+    public boolean redo() {
+        return mDrawView.redo();
+    }
+
+    // TODO: 분리..?
+    public enum Shape {
+        RECTANGLE,
+        CIRCLE,
     }
 }
