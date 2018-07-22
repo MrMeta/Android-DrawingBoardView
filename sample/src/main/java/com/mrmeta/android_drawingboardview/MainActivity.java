@@ -19,31 +19,48 @@ public class MainActivity extends AppCompatActivity {
 
         mDrawingBoardView = (DrawingBoardView)findViewById(R.id.draw_view);
 
-        Button button = (Button)findViewById(R.id.button);
-        button.setOnClickListener(new View.OnClickListener() {
+        Button selectBlue = (Button)findViewById(R.id.select_blue);
+        selectBlue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mDrawingBoardView.setDrawColor(Color.BLUE);
             }
         });
 
-        Button button2 = (Button)findViewById(R.id.button2);
-        button2.setOnClickListener(new View.OnClickListener() {
+        Button selectBlack = (Button)findViewById(R.id.select_black);
+        selectBlack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mDrawingBoardView.setDrawWidth(8);
+                mDrawingBoardView.setDrawColor(Color.BLACK);
             }
         });
 
-        Button button3 = (Button)findViewById(R.id.button3);
-        button3.setOnClickListener(new View.OnClickListener() {
+        Button doubleWidth = (Button)findViewById(R.id.double_width);
+        doubleWidth.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mDrawingBoardView.setDrawWidth(mDrawingBoardView.getDrawWidth() * 2);
+            }
+        });
+
+        Button halveWidth = (Button)findViewById(R.id.halve_width);
+        halveWidth.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mDrawingBoardView.setDrawWidth(mDrawingBoardView.getDrawWidth() / 2);
+            }
+        });
+
+        Button halveOpacity = (Button)findViewById(R.id.halve_opacity);
+        halveOpacity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mDrawingBoardView.setDrawAlpha(mDrawingBoardView.getDrawAlpha() / 2);
             }
         });
-        Button button4 = (Button)findViewById(R.id.button4);
-        button4.setOnClickListener(new View.OnClickListener() {
+
+        Button undoBtn = (Button)findViewById(R.id.undo);
+        undoBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(mDrawingBoardView.canUndo())
@@ -51,12 +68,44 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Button button5 = (Button)findViewById(R.id.button5);
-        button5.setOnClickListener(new View.OnClickListener() {
+        Button redoBtn = (Button)findViewById(R.id.redo);
+        redoBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(mDrawingBoardView.canRedo())
                     mDrawingBoardView.redo();
+            }
+        });
+
+        Button selectPen = (Button)findViewById(R.id.select_pen);
+        selectPen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mDrawingBoardView.selectPen();
+            }
+        });
+
+        Button selectEraser = (Button)findViewById(R.id.select_eraser);
+        selectEraser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mDrawingBoardView.selectEraser();
+            }
+        });
+
+        Button selectRectangle = (Button)findViewById(R.id.select_rectangle);
+        selectRectangle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mDrawingBoardView.selectShape(DrawingBoardView.Shape.RECTANGLE);
+            }
+        });
+
+        Button selectCircle = (Button)findViewById(R.id.select_circle);
+        selectCircle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mDrawingBoardView.selectShape(DrawingBoardView.Shape.CIRCLE);
             }
         });
 
