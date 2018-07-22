@@ -1,1 +1,1 @@
-include ':sample', ':drawingboardview'
+include ':sample', ':drawview', ':drawingboardview'
