@@ -2,6 +2,7 @@ package com.mrmeta.drawingboardview;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.util.AttributeSet;
 
 import com.byox.drawview.enums.DrawingMode;
@@ -62,6 +63,7 @@ public class DrawingBoardView extends DrawView {
     // select eraser
     public DrawingBoardView selectEraser() {
         setDrawingMode(DrawingMode.ERASER);
+        setPaintStyle(Paint.Style.STROKE);
         return this;
     }
 
@@ -69,12 +71,14 @@ public class DrawingBoardView extends DrawView {
     public DrawingBoardView selectPen() {
         setDrawingMode(DrawingMode.DRAW);
         setDrawingTool(DrawingTool.PEN);
+        setPaintStyle(Paint.Style.STROKE);
         return this;
     }
 
     // select shape
     public DrawingBoardView selectShape(Shape type) {
         setDrawingMode(DrawingMode.DRAW);
+        setPaintStyle(Paint.Style.FILL_AND_STROKE);
         switch (type) {
             case RECTANGLE:
                 setDrawingTool(DrawingTool.RECTANGLE);
@@ -98,6 +102,4 @@ public class DrawingBoardView extends DrawView {
         super.clearHistory();
         return this;
     }
-
-    // TODO: shape fill color
 }
