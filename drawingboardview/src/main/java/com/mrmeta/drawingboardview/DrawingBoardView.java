@@ -6,7 +6,9 @@ import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.SeekBar;
 
 import com.byox.drawview.enums.DrawingMode;
 import com.byox.drawview.enums.DrawingTool;
@@ -14,6 +16,8 @@ import com.byox.drawview.utils.SerializablePaint;
 import com.byox.drawview.views.DrawView;
 
 public class DrawingBoardView extends LinearLayout {
+
+    private static final int DRAW_WIDTH_MINIMUM = 1;
 
     DrawView mDrawView;
 
@@ -39,6 +43,64 @@ public class DrawingBoardView extends LinearLayout {
 
         mDrawView = view.findViewById(R.id.draw_view);
         initDrawView();
+
+        ImageButton selectPenButton = view.findViewById(R.id.select_pen);
+        selectPenButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                selectPen();
+            }
+        });
+
+        ImageButton selectEraserButton = view.findViewById(R.id.select_eraser);
+        selectEraserButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                selectEraser();
+            }
+        });
+
+        ImageButton selectRectangleButton = view.findViewById(R.id.select_rectangle);
+        selectRectangleButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                selectShape(Shape.RECTANGLE);
+            }
+        });
+
+        ImageButton selectCircleButton = view.findViewById(R.id.select_circle);
+        selectCircleButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                selectShape(Shape.CIRCLE);
+            }
+        });
+
+        ImageButton selectFillButton = view.findViewById(R.id.select_fill);
+        selectFillButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                selectFill();
+            }
+        });
+
+        SeekBar selectDrawWidthSeekBar = view.findViewById(R.id.select_draw_width);
+        selectDrawWidthSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                setDrawWidth(DRAW_WIDTH_MINIMUM + progress);
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
     }
 
     public void initDrawView() {
