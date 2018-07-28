@@ -3,9 +3,11 @@ package com.mrmeta.drawingboardview;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.drawable.GradientDrawable;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
@@ -101,6 +103,11 @@ public class DrawingBoardView extends LinearLayout {
 
             }
         });
+
+        attachColorButton(view, R.id.select_red, "#f44236");
+        attachColorButton(view, R.id.select_green, "#8bc24a");
+        attachColorButton(view, R.id.select_blue, "#03a9f5");
+        attachColorButton(view, R.id.select_black, "#000000");
     }
 
     public void initDrawView() {
@@ -112,6 +119,21 @@ public class DrawingBoardView extends LinearLayout {
             mDrawView.setBackgroundPaint(paint);
             mDrawView.setBackgroundColor(Color.WHITE);
         }
+    }
+
+    public void attachColorButton(View view, int id, String colorString) {
+        GradientDrawable circleShape = (GradientDrawable) getResources().getDrawable(R.drawable.color_circle);
+        final int color = Color.parseColor(colorString);
+        circleShape.setColor(color);
+
+        Button btn = view.findViewById(id);
+        btn.setBackground(circleShape);
+        btn.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setDrawColor(color);
+            }
+        });
     }
 
     // pen color, fill color, shape border color
