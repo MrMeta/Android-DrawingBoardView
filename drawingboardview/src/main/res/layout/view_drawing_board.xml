@@ -135,7 +135,6 @@
                         android:layout_margin="4dp"
                         app:base_color="#8bc24a"/>
 
-
                     <com.mrmeta.drawingboardview.ColorRadioButton
                         android:id="@+id/select_blue"
                         android:layout_width="wrap_content"
@@ -143,14 +142,14 @@
                         android:layout_margin="4dp"
                         app:base_color="#03a9f5"/>
 
-                </RadioGroup>
+                    <RadioButton
+                        android:id="@+id/more_color"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="4dp"
+                        android:button="@drawable/more_color_radio_button" />
 
-                <Button
-                    android:id="@+id/select_detail"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:layout_gravity="center"
-                    android:layout_margin="4dp" />
+                </RadioGroup>
 
             </LinearLayout>
 

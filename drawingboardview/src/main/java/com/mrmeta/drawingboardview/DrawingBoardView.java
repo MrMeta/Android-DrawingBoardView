@@ -1,6 +1,8 @@
 package com.mrmeta.drawingboardview;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
@@ -8,12 +10,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
 import android.widget.SeekBar;
 
 import com.byox.drawview.enums.DrawingMode;
 import com.byox.drawview.enums.DrawingTool;
 import com.byox.drawview.utils.SerializablePaint;
 import com.byox.drawview.views.DrawView;
+import com.skydoves.colorpickerpreference.ColorEnvelope;
+import com.skydoves.colorpickerpreference.ColorListener;
+import com.skydoves.colorpickerpreference.ColorPickerDialog;
 
 public class DrawingBoardView extends LinearLayout {
 
@@ -131,6 +137,29 @@ public class DrawingBoardView extends LinearLayout {
             @Override
             public void onClick(View v) {
                 setDrawColor(((ColorRadioButton)v).getBaseColorCode());
+            }
+        });
+
+        RadioButton moreColorButton = view.findViewById(R.id.more_color);
+        moreColorButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ColorPickerDialog.Builder builder = new ColorPickerDialog.Builder(getContext(), AlertDialog.THEME_DEVICE_DEFAULT_DARK);
+                builder.setTitle(getContext().getString(R.string.choose_color));
+                builder.setPreferenceName("pen_color");
+                builder.setPositiveButton(getContext().getString(R.string.confirm), new ColorListener() {
+                    @Override
+                    public void onColorSelected(ColorEnvelope colorEnvelope) {
+                        setDrawColor(colorEnvelope.getColor());
+                    }
+                });
+                builder.setNegativeButton(getContext().getString(R.string.cancel), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                });
+                builder.show();
             }
         });
     }
